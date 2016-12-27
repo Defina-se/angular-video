@@ -110,40 +110,38 @@ angular.module('anguvideo',[])
 
                             $(function() {
                                   var iframe = $('#playerYV')[0];
-                                  var player = $f(iframe);
+                                  iframe.src = embedFriendlyUrl;
+
+                                  var player = new Vimeo.Player(iframe);
                                   // When the player is ready, add listeners for pause, finish, and playProgress
-                                  player.addEvent('ready', function() {
-                                      player.addEvent('pause', function(){
+                                  player.ready().then(function() {
+                                      player.on('pause', function(){
                                         $interval.cancel(scope.timer);
                                       });
-                                      player.addEvent('finish', function(){
+                                      player.on('ended', function(){
                                         scope.$emit("anguvideo:finishVideo");
                                         $interval.cancel(scope.timer);
                                       });
-                                      player.addEvent('play', function(){
+                                      player.on('play', function(){
                                         var PlayerVimeoDuration, PlayerVimeoCurrentTime;
-                                        player.api('getDuration', function(PlayerVimeoDuration) {
+                                        player.getDuration().then(function(PlayerVimeoDuration) {
                                           if(!scope.timeSpent.length){
                                             for(var i=0, l=parseInt(PlayerVimeoDuration); i<l; i++) scope.timeSpent.push(false);
                                           }
                                         });
                                       });
-                                      player.addEvent('playProgress', function(data, id){
+                                      player.on('progress', function(data, id){
                                         scope.timeSpent[parseInt(data.seconds)] = true;
                                         showPercentage();
                                       });
                                   });
 
-                                  scope.$on("pause",function(){
-                                    player.api('pause');
-                                  });
-                                  scope.$on("play",function(){
-                                     player.api('play');
-                                  });
+                                  scope.$on("pause", player.pause);
+                                  scope.$on("play", player.play);
 
                                   scope.$on("anguvideo:watchedMinPercentage", function(){
-                                    player.removeEvent('play');
-                                    player.removeEvent('playProgress');
+                                    player.off('play');
+                                    player.off('progress');
                                     player = undefined;
                                     iframe = undefined;
                                   });
@@ -168,9 +166,7 @@ angular.module('anguvideo',[])
                             }
                         }
 
-                        scope.url = $sce.trustAsResourceUrl(embedFriendlyUrl);
-                        //console.log("done",  scope.url, embedFriendlyUrl);
-
+                      scope.url = $sce.trustAsResourceUrl(embedFriendlyUrl);
                     }
 
                 });
