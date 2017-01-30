@@ -36,13 +36,19 @@ angular.module('anguvideo',[])
                    $interval.cancel(scope.timer);
                 }
               }
-              (function onYouTubeIframeAPIReady() {
-                player = new YT.Player('playerYV', {
-                  events: {
-                    'onStateChange': onPlayerStateChange
+
+              var tag = document.createElement('script');
+              tag.src = "https://www.youtube.com/iframe_api";
+              var firstScriptTag = document.getElementsByTagName('script')[0];
+              firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+              window.onYouTubeIframeAPIReady = function() {
+              player = new YT.Player('playerYV', {
+                events: {
+                  'onStateChange': onPlayerStateChange
                   }
                 });
-              }());
+              };
 
               function record(){
               	scope.timeSpent[ parseInt(player.getCurrentTime()) ] = true;
