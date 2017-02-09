@@ -101,6 +101,7 @@ angular.module('anguvideo',[])
                             if (newVal.indexOf("player.vimeo") >= 0) {
                                 embedFriendlyUrl = newVal;
                             } else {
+                                embedFriendlyUrl = newVal;
                                 urlSections = embedFriendlyUrl.split(".com/");
                                 embedFriendlyUrl = embedFriendlyUrl.replace("vimeo", "player.vimeo");
                                 embedFriendlyUrl = embedFriendlyUrl.replace("/" + urlSections[urlSections.length - 1], "/video/" + urlSections[urlSections.length - 1] + "");
