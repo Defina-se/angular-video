@@ -11,7 +11,8 @@ angular.module('anguvideo',[])
             scope: {
                 source: '=ngModel',
                 width: '@',
-                height: '@'
+                height: '@',
+								autoPlay: '@'
             },
             replace: true,
             template: '<div class="anguvideo embed-responsive embed-responsive-16by9">' +
@@ -105,7 +106,7 @@ angular.module('anguvideo',[])
                                 urlSections = embedFriendlyUrl.split(".com/");
                                 embedFriendlyUrl = embedFriendlyUrl.replace("vimeo", "player.vimeo");
                                 embedFriendlyUrl = embedFriendlyUrl.replace("/" + urlSections[urlSections.length - 1], "/video/" + urlSections[urlSections.length - 1] + "");
-                                embedFriendlyUrl += '?autoplay=0&api=1&player_id=playerYV';
+                                embedFriendlyUrl += '?autoplay=' + scope.autoPlay +  '&api=1&player_id=playerYV';
                             }
 
                             $(function() {
