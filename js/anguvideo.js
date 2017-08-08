@@ -38,11 +38,13 @@ angular.module('anguvideo',[])
                 }
               }
               (function onYouTubeIframeAPIReady() {
-                player = new YT.Player('playerYV', {
-                  events: {
-                    'onStateChange': onPlayerStateChange
-                  }
-                });
+                if (typeof(YT) !== 'undefined' || typeof(YT.Player) !== 'undefined') {
+                  player = new YT.Player('playerYV', {
+                    events: {
+                      'onStateChange': onPlayerStateChange
+                    }
+                  });
+                }
               }());
 
               function record(){
