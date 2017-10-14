@@ -4,11 +4,11 @@
 	<title>AngularJs Video Directive</title>
 </head>
 <body ng-app="myApp">
-	<div ng-controller="AppCtrl" style="margin: 0px auto">
+	<div style="margin: 0px auto">
 		<h1>anguVideo</h1>
 		<p>
 			This is a directive that takes in a vimeo or a youtube url and converts it into an embedded friendly url and the displays it.
-			
+
 		</p>
 		<p>
 			<strong>Note:</strong> If an embedded friendly url is provided then the directive will simply gets the trusted resource url using angular's trustAsResourceUrl() functionality and then display the video
@@ -32,26 +32,39 @@
 		<h3>YouTube Examples</h3>
 		<hr>
 
-		<div>{{youTubeURL}}</div>
-		<div anguvideo ng-model="youTubeURL" width="250" height="250"></div>
+		<div>http://www.youtube.com/watch?v=vabnZ9-ex7o</div>
+		<div anguvideo url="http://www.youtube.com/watch?v=vabnZ9-ex7o" width="250" height="250"></div>
 		<br> <br>
 
-		<div>{{youTubeShareURL}}</div>
-		<anguvideo ng-model="youTubeShareURL" width="300" height="400"></anguvideo>
+		<div>http://youtu.be/5EVMjnHFg-w</div>
+		<anguvideo url="http://youtu.be/5EVMjnHFg-w" width="300" height="400"></anguvideo>
 		<br> <br>
-		<div>{{youTubeEmbededURL}}</div>
-		<anguvideo ng-model="youTubeEmbededURL" width="50%" height="300"></anguvideo>
-		
+
+		<div>http://www.youtube.com/embed/u9hauSrihYQ</div>
+		<anguvideo url="http://www.youtube.com/embed/u9hauSrihYQ" width="50%" height="300"></anguvideo>
+
 		<h3>Vimeo Examples</h3>
 		<hr>
-		<div>{{vimeoURL}}</div>
-		<anguvideo ng-model="vimeoURL" width="50%" height="500"></anguvideo>
+		<div>http://vimeo.com/35514005</div>
+		<anguvideo url="http://vimeo.com/35514005" width="50%" height="500"></anguvideo>
 		<br> <br>
 
 	</div>
-	
+
+	<script src="//code.jquery.com/jquery-latest.min.js"></script>
+
 	<script src="./bower_components/angular/angular.js"></script>
-	<script src="./js/controller.js"></script>
+	<script src="./bower_components/angular-load/dist/angular-load.min.js"></script>
+
+	<script src="shared/player.service.js"></script>
+
+	<script src="./js/app.js"></script>
 	<script src="js/anguvideo.js"></script>
+
+	<script src="components/youtube/controller.js"></script>
+	<script src="components/youtube/config.js"></script>
+
+  <script src="components/vimeo/controller.js"></script>
+  <script src="components/vimeo/config.js"></script>
 </body>
 </html>
