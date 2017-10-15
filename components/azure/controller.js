@@ -61,6 +61,7 @@ angular.module('anguvideo.azure.controller', ['angularLoad'])
 
       $scope.$on("anguvideo:watchedMinPercentage", function() {
         ctrl.player.removeEventListener(amp.eventName.play)
+        ctrl.player.removeEventListener(amp.eventName.pause)
         ctrl.player.removeEventListener(amp.eventName.timeupdate)
         ctrl.player = undefined
       })
