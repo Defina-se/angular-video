@@ -4,7 +4,7 @@
 /*global angular*/
 'use strict';
 
-angular.module('anguvideo', ['anguvideo.vimeo', 'anguvideo.youtube'])
+angular.module('anguvideo', ['anguvideo.vimeo', 'anguvideo.youtube', 'anguvideo.azure'])
     .directive("anguvideo", ['$sce', '$interval', function ($sce, $interval) {
         return {
             restrict: 'EA',
@@ -20,17 +20,11 @@ angular.module('anguvideo', ['anguvideo.vimeo', 'anguvideo.youtube'])
                 return '<div><vimeo-player url="' + attrs.url + '"></vimeo-player></div>'
               } else if (attrs.url.indexOf('youtu.be') >= 0 || attrs.url.indexOf("youtube.com") >= 0) {
                 return '<div><youtube-player url="' + attrs.url + '"></youtube-player></div>'
-              } else if (attrs.url.indexOf('azure') >= 0) {
-                return './components/azure/index.html'
+              } else if (attrs.url.indexOf('windows') >= 0) {
+                return '<div><azure-media-player url="' + attrs.url + '"></azure-media-player></div>'
               } else {
                 throw 'could not determine the right template for ' + attrs.url
               }
-            },
-            link: function (scope, element, attrs) {
-                element.on("$destroy",function() {
-                  $interval.cancel(scope.timer);
-                  scope.watchedMinPercentage = 0;
-                })
             }
         };
     }]);

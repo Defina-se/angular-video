@@ -3,6 +3,6 @@ angular.module('anguvideo.azure', ['anguvideo.azure.controller'])
     templateUrl : 'components/azure/component.html',
     controller : 'AzureMediaPlayerController',
     bindings : {
-      url : '<'
+      url : '@'
     }
   })
