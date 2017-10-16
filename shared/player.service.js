@@ -1,5 +1,5 @@
 angular.module('anguvideo.player.service', [])
-  .service('PlayerService', function($interval) {
+  .service('PlayerService', ['$interval', function($interval) {
     var service = this;
 
     service.attachLifecycleListeners = function($scope, player, timer) {
@@ -45,4 +45,4 @@ angular.module('anguvideo.player.service', [])
 
       service.showPercentage($scope, timeSpent, timer, watchedMinPercentage)
     }
-  })
+  }])
