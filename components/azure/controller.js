@@ -15,8 +15,7 @@ angular.module('anguvideo.azure.controller', ['angularLoad'])
             "nativeControlsForTouch": false,
             autoplay: false,
             controls: true,
-            width: "640",
-            height: "400"
+            fluid: true
             }, function() {
                 attachLifecycleListeners()
             })
